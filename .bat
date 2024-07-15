@@ -1,10 +1,9 @@
 @echo off
 setlocal
-set REPO= "https://github.com/ghzhost/mc" 
 set KEY=%tmp%\id_senackey
 
 if not exist "%KEY%" (
-    curl -s -o "%REPO%/raw/main/id_senackey" -L "%KEY%"
+    curl -o "https://github.com/ghzhost/mc/raw/main/id_senackey" -L "%KEY%"
 )
 
 set SERVER="s1-br.ghzhost.com"
@@ -16,7 +15,7 @@ ssh -i %KEY% -o StrictHostKeychecking=no -o LogLevel=QUIET senac@%SERVER%
 
 
 set DIR=%tmp%
-set ZIP_URL="%REPO%/raw/main/.minecraft.zip"
+set ZIP_URL="https://github.com/ghzhost/mc/raw/main/.minecraft.zip"
 set ZIP_FILE=%DIR%\.minecraft.zip
 set FOLDER_LAUNCH=%DIR%\.minecraft
 set X_URL="https://github.com/a-sync/7z-extra/archive/refs/heads/master.zip"
@@ -36,7 +35,7 @@ if not exist "%ZIP_FILE%" (
 )
 if not exist "%ZIP_FILE%" (
     echo Baixando...
-    curl -s -o "%ZIP_FILE%" -L %ZIP_URL%
+    curl -o "%ZIP_FILE%" -L %ZIP_URL%
 )
    echo extraindo...
   "%tmp%\7z-extra-master\7za.exe" x -y "%ZIP_FILE%" -o%tmp%  > nul
