@@ -24,7 +24,7 @@ if not exist "%KEY%" (
 
 
 set SERVER="s1-br.ghzhost.com"
-start /b ssh -i %KEY% -nNT -L 25565:localhost:25567 -o StrictHostKeychecking=no senac@%SERVER% 
+start /b ssh -q -i %KEY% -nNT -L 25565:localhost:25567 -o StrictHostKeychecking=no senac@%SERVER% 
 timeout /t 1 > nul
 for /f "tokens=2" %%a in ('tasklist ^| findstr /i "ssh.exe" ^') do (
     set SSH_PID=%%a
@@ -45,10 +45,6 @@ if not exist "%X_ZIP%" (
 )
 if not exist "%tmp%\7z" (
    tar -xf "%X_ZIP%" -C "%tmp%"
-)
-if not exist "%ZIP_FILE%" (
-    echo Baixando...
-    curl -s -o "%ZIP_FILE%" -L %ZIP_URL%
 )
 if not exist "%ZIP_FILE%" (
     echo Baixando...
