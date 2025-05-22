@@ -25,7 +25,7 @@ if not exist "%KEY%" (
 
 set SERVER="s1-br.ghzhost.com"
 start /b ssh -q -i %KEY% -nNT -L 25565:localhost:25567 -o StrictHostKeychecking=no senac@%SERVER% 
-timeout /t 1 > nul
+timeout /t 10 > nul
 for /f "tokens=2" %%a in ('tasklist ^| findstr /i "ssh.exe" ^') do (
     set SSH_PID=%%a
 )
